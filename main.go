@@ -1,4 +1,4 @@
-package playgo
+package main
 
 import (
 	"flag"
@@ -64,4 +64,14 @@ func ShareAndOpen() (string, error) {
 	}
 	clipboard.WriteAll(url)
 	return url, open.Start(url)
+}
+
+func main() {
+	url, err := ShareAndOpen()
+	if err != nil {
+		fmt.Printf("Error: %s\nUSAGE: playgo [FILE]\n", err.Error())
+		os.Exit(1)
+	}
+
+	fmt.Printf("%s (copied to clipboard)\n", url)
 }
